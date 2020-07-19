@@ -31,12 +31,8 @@ long_step = round(samplerate * 0.02267)
 short_step = round(samplerate * 0.0002267)
 silence_time_increment = round(min_silence_time * 0.02)
 
-def main():
-
-    if not os.path.isdir(f"{OUTPUT_FOLDER_NAME}"):
-     os.mkdir(f"{OUTPUT_FOLDER_NAME}")
-
-    sensor(data, samplerate, min_silence_time)
+if not os.path.isdir(f"{OUTPUT_FOLDER_NAME}"):
+ os.mkdir(f"{OUTPUT_FOLDER_NAME}")
 
 def sensor(data, samplerate, min_silence_time):
     # recursive function dividing the source audio file into several small parts
@@ -76,5 +72,4 @@ def sensor(data, samplerate, min_silence_time):
         enumerator += 1
         scipy.io.wavfile.write(f"{OUTPUT_FOLDER_NAME}/{enumerator}{POSTFIX_NAME}.wav", samplerate, new_data)
 
-if __name__ == '__main__':
-    main()
+sensor(data, samplerate, min_silence_time)
